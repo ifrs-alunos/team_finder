@@ -2,7 +2,7 @@
 
 Aplicação que tem por objetivo otimizar a seleção de integrantes de grupos dentro de uma turma, considerando habilidades requeridas para a atividade considerada e as habilidades de cada estudante, informadas por ele.
 
-Professor avaliador: Deivison Porto de Souza
+Professor avaliador: Deivison Porto de Sousa
 
 ## Desenvolvedores
 
