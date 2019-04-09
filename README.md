@@ -7,7 +7,7 @@ Professor avaliador: Deivison Porto de Sousa
 ## Desenvolvedores
 
 - **Diego Cardoso Nunes**: \
-Estudante do Curso Técnico em Multimídia Intergado ao Ensino Médio do IFRS - _Campus_ Vacaria. Tem experiência com a linguagem Python, em especial o _framework_ [Django](https://www.djangoproject.com/), além de desenvolvimento _front-end_ (HTML, CSS e JavaScript), com conhecimentos dos _framework_ [Materialize](https://materializecss.com/) e [jQuery](https://jquery.com/). Possui conhecimento básico em desenvolvimento para Android (Java) e em Node.js(JavaScript). Já trabalhou no desenvolvimento do site da Semana Acadêmica do IFRS - Vacaria ([SEMAC](semac.vacaria.ifrs.edu.br)), bem como do servidor do aplicativo IFApp, destinado ao compartilhamento de informações do _Campus_. 
+Estudante do Curso Técnico em Multimídia Intergado ao Ensino Médio do IFRS - _Campus_ Vacaria. Tem experiência com a linguagem Python, em especial o _framework_ [Django](https://www.djangoproject.com/), além de desenvolvimento _front-end_ (HTML, CSS e JavaScript), com conhecimentos dos _framework_ [Materialize](https://materializecss.com/) e [jQuery](https://jquery.com/). Possui conhecimento básico em desenvolvimento para Android (Java) e em Node.js(JavaScript). Já trabalhou no desenvolvimento do site da Semana Acadêmica do IFRS - Vacaria ([SEMAC](http://semac.vacaria.ifrs.edu.br)), bem como do servidor do aplicativo IFApp, destinado ao compartilhamento de informações do _Campus_. 
 
 - **Luís Eduardo dos Reis Borges**: \
 Estudante do Curso Técnico em Multimídia Intergado ao Ensino Médio do IFRS - _Campus_ Vacaria
