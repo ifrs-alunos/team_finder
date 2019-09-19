@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+
+{% load styles %}
+
+{% block main %}
+    <div class="section container row">
+        <h1>Faça seu cadastro!</h1>
+        <form method="POST" class="row col s12 m10 l8">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="input-field col s12 {% if field.name in 'email' %}m12{% else %}m6{% endif %}">
+                    {% if field.errors %}
+                        {{ field|add_classes:'validate invalid' }}
+                    {% else %}
+                        {{ field|add_classes:'validate' }}
+                    {% endif %}
+                    {{ field.label_tag }}
+                    <span class="helper-text" data-error="{{ field.errors.0 }}"></span>
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn-large green darken-3">Cadastrar!</button>
+        </form>
+    </div>
+{% endblock %}

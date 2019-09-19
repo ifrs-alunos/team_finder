@@ -1,0 +1,90 @@
+#lectures_div {
+	width: 60vw;
+	margin-left: -10vw;
+}
+
+.tamImg {
+	width: 4em;
+}
+
+.weeklabels {
+}
+h4 a i {
+	color: blue;
+	font-size: 200%;
+}
+
+#palestras p {
+	color: black;
+}
+
+.tamMini {
+	width: 2em;
+	height: 2em;
+}
+
+ul {
+	align-content: center;
+}
+
+#palestras form div div b{
+	font-size: 1.2em;
+}
+
+#palestras  div{
+	padding-bottom: 2em;
+}
+
+#palestras h4 {
+	margin-bottom: .8em;
+}
+
+.tabs .indicator{
+    background-color: #1b5e20;
+}
+
+.switch {
+	margin:0 0 40px 0; 
+}
+
+.agropecuaria{
+	border-left:0.7em solid #007A00FF;}
+
+.agropecuaria i{
+	color: #007A00FF;
+}
+
+.manutencao{
+	border-left:0.7em solid #1712B9FF;
+}
+
+.manutencao i{
+	color: #1712B9FF;
+}
+
+.logistica{
+	border-left:0.7em solid #FF8000FF;
+}
+
+.logistica i{
+	color: #FF8000FF;
+}
+
+.multimidia{
+	border-left:0.7em solid #0389FFFF;
+}
+
+.multimidia i{
+	color: #0389FFFF;
+}
+
+.biologicas{
+	border-left:0.7em solid #40FF46FF;
+}
+
+.biologicas i{
+	color: #40FF46FF;
+}
+.todos{
+	border-left:0.7em solid #FF4AA8FF;
+}

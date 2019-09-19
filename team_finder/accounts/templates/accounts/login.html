@@ -1,0 +1,48 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+{% load styles %}
+
+{% block head_extra %}
+	<!--Custom imports-->
+	<link rel="stylesheet" href="{% static 'accounts/css/login.css' %}">
+{% endblock head_extra %}
+
+{% block main %}
+	<main class="container white">
+		<section class="section row">
+			<div class="article">
+				<h2>Login</h2>
+                {% if error %}
+                    <p class="error-message">{{ error }}</p>
+                {% endif %}
+				<form class="col s12 m8 l6" id="login-form" method="POST">
+                    {% csrf_token %}
+					{% for field in form %}
+                        <div class="input-field">
+                            {% if field.errors %}
+                                {{ field|add_classes:'validate invalid' }}
+                                <span class="helper-text" data-error="{{ field.errors.0 }}"></span>
+                            {% else %}
+                                {{ field|add_classes:'validate' }}
+                            {% endif %}
+                            {{ field.label_tag }}
+                        </div>
+					{% endfor %}
+
+					<div>
+						<button class="btn btn-large red waves-effect waves-light col s12 m6 l5" type="submit">Entrar</button>
+
+						<a href='{% url "register" %}' class="batatao">Ainda não tem conta? Cadastre-se!</a>
+					</div>
+				</form>
+			</div>
+		</section>
+	</main>
+	
+{% endblock main %}
+
+{% block end_scripts %}
+	<script type="text/javascript" src="{% static 'base/js/materialize_init.js' %}"></script>
+{% endblock end_scripts %}
+	
