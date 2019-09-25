@@ -1,14 +1,9 @@
-#IMPORTS
+from tinder.models.base import *
+from django.utils.translation import gettext as _
+from django.utils import timezone
+#with tinder.models.skills as batata
 
-class Group(object):
+class Group(BaseModel):
 	"""docstring for Group"""
-	name = models.CharField(max_length=150)
-	members = models.ManyToManyField(Profile)
-	def __init__(self, arg):
-		self.arg = arg
-
-	def __str__():
-		return "{}".format()
-
-	
-		
+	name = models.CharField(max_length=100)
+	foundation = models.DateField(_("Foundation Date"), auto_now_add=True)
