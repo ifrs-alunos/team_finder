@@ -1,0 +1,7 @@
+<script>
+    {% if messages %}
+        $(() => {
+            {% for message in messages %}M.toast({html: "{{ message }}", classes: {% with message.tags as tags %}{% if 'warning' in tags %}"amber darken-2 {% elif 'success' in tags %}"green {% elif 'error' in tags %}"red {% elif 'info' in tags %}"blue {% endif %}{{ message.tags }}"});{% endwith %}{% endfor %}
+        });
+    {% endif %}
+</script>

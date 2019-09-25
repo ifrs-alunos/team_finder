@@ -1,0 +1,67 @@
+.hidden {
+	display: none;
+}
+
+#search {
+	background-color: #ccc;
+	height: 2em;
+	border: none;
+	padding: .3em;
+	box-sizing: border-box;
+	border-radius: 5px;
+	width: 30ch;
+}
+
+.transparent {
+	opacity: .8;
+}
+
+.tamanho {
+	height: 24em;
+}
+
+.solid {
+	opacity: 1;
+	max-height: 3.6em;
+	box-sizing: border-box;
+	margin-top: 6px;
+}
+
+nav {
+	background-image: url('../images/header_background.jpg');
+}
+.error-message {
+	color: red;
+}
+
+.dropdown-content {
+	z-index: 1000000000;
+}
+
+@media (min-width: 992px) {
+	.carousel {
+		width: 80%;
+		margin: auto;
+	}
+}
+
+@media (max-width: 1250px) and (min-width: 992px){
+	.carousel {
+		margin-top: 6em;
+		width: 75%;
+	}
+}
+
+.carousel-container {
+	width: 100%;
+}
+
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
