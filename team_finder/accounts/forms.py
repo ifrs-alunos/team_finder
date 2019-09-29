@@ -14,7 +14,7 @@ class ProfileCreationForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        exclude = ('owner', 'avatar',)
+        exclude = ('owner', 'avatar', 'skills')
 
     def clean(self):
         cleaned_data = super().clean()

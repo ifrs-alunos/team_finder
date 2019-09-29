@@ -14,3 +14,5 @@ class SkillLevel(BaseModel):
 	skill = models.ForeignKey('Skill', related_name='level', on_delete=models.CASCADE)
 	level = models.IntegerField(choices=SKLEVEL, default=1)
 	
+	def __str__(self):
+		return("{} (LVL.{})".format(self.skill, self.level))
