@@ -11,7 +11,7 @@ class SkillLevel(BaseModel):
 	]
 
 	profile = models.ForeignKey('accounts.Profile', on_delete=models.CASCADE)
-	skill = models.ForeignKey('Skill', related_name='level', on_delete=models.CASCADE)
+	skill = models.ForeignKey('Skill', related_name='levels', on_delete=models.CASCADE)
 	level = models.IntegerField(choices=SKLEVEL, default=1)
 
 	def __str__(self):

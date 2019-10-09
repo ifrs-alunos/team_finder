@@ -1,7 +1,6 @@
 from tinder.models.base import *
-from django.utils.translation import gettext as _
 from django.utils import timezone
-#with tinder.models.skills as batata
+
 
 class Group(BaseModel):
 	"""docstring for Group"""
