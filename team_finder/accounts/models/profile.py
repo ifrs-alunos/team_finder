@@ -26,3 +26,15 @@ class Profile(models.Model):
     class Meta:
         verbose_name = "Perfil"
         verbose_name_plural = "Perfis"
+
+    def set_skill(self, newskill, level):
+        new_skill = SkillLevel(profile = self, skill = newskill, level = level)
+        new_skill.save()
+
+    def rm_skill(self, skill):
+        self.skills.delete(skill)
+
+    def get_skills(self):
+        return self.skills.all()
+
+

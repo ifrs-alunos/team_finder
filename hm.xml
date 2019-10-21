@@ -1,0 +1,20 @@
+def add_skill(self, skill, level):
+        pass
+    def set_skill(self, skill, level):
+        pass
+    def get_skill(self):
+        pass
+    def get_groups(self):
+        pass
+    def rm_skill(self):
+        pass
+    def join_group(self):
+        pass
+    def rm_group(self):
+        pass
+
+SENHAS PARA CADA UM DOS TESTES
+ricardex_roleflex - xesquedele8973 - 
+tabajura_gameplays - gumercindo66 - 
+planarias_planoides - bolinhos87 - 
+brisa_loka - filosoflinston - 

@@ -15,4 +15,4 @@ class SkillLevel(BaseModel):
 	level = models.IntegerField(choices=SKLEVEL, default=1)
 	
 	def __str__(self):
-		return("{} (LVL.{})".format(self.skill, self.level))
+		return("{} (LVL.{}) - Profile: {}".format(self.profile, self.skill, self.level))

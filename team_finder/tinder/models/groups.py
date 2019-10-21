@@ -9,6 +9,7 @@ class Group(BaseModel):
 	foundation = models.DateField(_("Foundation Date"), auto_now_add=True)
 	members = models.ManyToManyField('accounts.Profile', related_name='group_list')
 	leader = models.ForeignKey('accounts.Profile', related_name='leader', on_delete=models.SET_NULL, null=True)
+	private = models.BooleanField(default=False, help_text='Is this group hidden from others?')
 
 	def __str__(self):
 		return("{} -({})".format(self.name, self.foundation))
