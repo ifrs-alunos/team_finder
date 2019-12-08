@@ -1,15 +1,45 @@
-button[type="submit"] {
-	padding: 0 4em;
+main {
+    align-items: center;
+    justify-content: center;
 }
 
-.buttons {
-	margin: 2em 0;
+form.login-form {
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+form.login-form label {
+    margin-top: 15px;
+    font-size: 20px;
 }
 
-#login-form {
-	margin: 2em 0;
+form.login-form input {
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #999999;
+    padding: 1em;
 }
 
-.batatao {
-	padding: 1em;
+form.login-form h2 {
+    color: white;
+    font-size: 50px;
+    align-self: center;
+}
+
+.login-btn {
+    padding: 10px;
+    font-size: 30px;
+    margin-top: 20px;
+    background-color: var(--accent-color);
+    border-radius: 5px;
+    border: 0;
+    cursor: pointer;
+    box-shadow: -1px -1px 10px 0 black;
+}
+
+.login-btn:hover {
+    box-shadow: .5px .5px 10px 0 black;
 }

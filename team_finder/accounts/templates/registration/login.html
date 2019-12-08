@@ -1,0 +1,17 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block head_extra %}
+	<!--Custom imports-->
+	<link rel="stylesheet" href="{% static 'accounts/css/login.css' %}">
+{% endblock head_extra %}
+
+{% block main_content %}
+    <form method="POST" class="login-form">
+        <h2>Login</h2>
+        {% csrf_token %}
+        {{ form }}
+        <button class="login-btn" type="submit">Entrar</button>
+    </form>
+{% endblock main_content %}

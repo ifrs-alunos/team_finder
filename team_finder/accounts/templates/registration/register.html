@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="{% static 'accounts/css/register.css' %}">
+{% endblock %}
+
+{% block main_content %}
+    <div class="registration-container">
+        <div class="call">
+            <h3>Venha usar o Team Finder!</h3>
+            <p>Descubra as melhores duplas para você em qualquer grupo</p>
+
+            <ul>
+                <li>Aumente sua produtividade</li>
+                <li>Faça amizades</li>
+                <li>Consiga resultados melhores</li>
+            </ul>
+        </div>
+        <div class="form">
+            <form action="" method="POST">
+                <h2>Cadastre-se!</h2>
+                {% csrf_token %}
+                {{ user_form }}
+                {{ profile_form }}
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

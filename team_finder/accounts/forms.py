@@ -1,56 +1,49 @@
 from django import forms
-from django.core.exceptions import ValidationError
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from .models import Profile
 
 
 class ProfileCreationForm(forms.ModelForm):
-    first_name = forms.CharField(label="Nome")
-    last_name = forms.CharField(label="Sobrenome")
-    username = forms.CharField(label="Nome de Usuário")
-    email = forms.EmailField(label="E-Mail")
-    password = forms.CharField(widget=forms.PasswordInput, label="Senha")
-    confirm_password = forms.CharField(widget=forms.PasswordInput, label="Confirme sua senha")
-
     class Meta:
         model = Profile
-        exclude = ('owner', 'avatar', 'skills')
-
-    def clean(self):
-        cleaned_data = super().clean()
-        password = cleaned_data.get('password')
-        confirm_password = cleaned_data.get('confirm_password')
-
-        if password != confirm_password:
-            self.add_error('confirm_password', ValidationError('Senhas não são iguais'))
-
-        username = cleaned_data.get('username')
-        if User.objects.filter(username=username).exists():
-            self.add_error('username', ValidationError("E-mail já cadastrado"))
-
-        return cleaned_data
-
-    def save(self, commit=True):
-        profile = super(ProfileCreationForm, self).save(commit=False)
-
-        username = self.cleaned_data.get('username')
-        email = self.cleaned_data.get('email')
-        password = self.cleaned_data.get('password')
-        first_name = self.cleaned_data.get('first_name')
-        last_name = self.cleaned_data.get('last_name')
-
-        user = User.objects.create_user(username=username, email=email, password=password,
-                                        first_name=first_name, last_name=last_name)
-        profile.owner = user
-
-        if commit:
-            profile.save()
-        return profile
+        fields = ()
 
 
-class LoginForm(forms.Form):
-    username = forms.EmailField(label='Nome de Usuário')
-    password = forms.CharField(label='Senha', widget=forms.PasswordInput)
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('shortbio', )
+
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', )
+
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        widgets = {
+            'username': forms.EmailInput()
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].label = 'E-mail'
+        self.fields['username'].help_text = ""
+        self.fields['password1'].label = 'Senha'
+        self.fields['password1'].help_text = ''
+        self.fields['password2'].label = 'Repita sua senha'
+        self.fields['password2'].help_text = ''
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.EmailField(label='E-mail', widget=forms.TextInput())
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password'].label = 'Senha'
 
 
 class AvatarChangeForm(forms.ModelForm):

@@ -1,0 +1,236 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="{% static 'accounts/css/review.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.5/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.5/cropper.min.js"></script>
+{% endblock head_extra %}
+
+{% block main_content %}
+    <div class="profile-container">
+        <div class="profile-content">
+            <div class="info">
+                <div class="heading">
+                    <h2>Perfil</h2>
+                    <a class="edit-btn" href="{% url 'edit_profile' %}">Editar</a>
+                </div>
+                <img src="{{ user.profile.avatar.url }}" alt="">
+                <p>{{ user.first_name }}</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, dignissimos dolores eius fugit molestiae sequi ullam veritatis. Animi aspernatur distinctio dolorem id iste molestiae officia praesentium quia sequi! Consequuntur, minima?</p>
+            </div>
+            <div class="classes">
+                <div class="heading">
+                    <h2>Meus grupos</h2>
+                    <form action="" class="search-form">
+                        <input type="text" class="group-search" placeholder="Pesquisa por grupos..." name="search">
+                        <button><i class="material-icons">search</i></button>
+                    </form>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Grupo</th>
+                            <th>Líder</th>
+                            <th>Número de membros</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+                        <tr>
+                            <td>Conhecedores da vida</td>
+                            <td>Joãozinho</td>
+                            <th>35</th>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% comment %}
+    <div class="col s12 m4 center-align" id="sidebar">
+        <div class="avatar-container">
+            <a class="modal-trigger" href="#modal-change-avatar">
+                {% if user.profile.avatar %}
+                    <img src="{{ user.profile.avatar.url }}" class="avatar">
+                {% else %}
+                    <i class="material-icons avatar">person</i>
+                {% endif %}
+            </a>
+        </div>
+        <div class="section left-align">
+            <b>Nome: </b> {{ user.get_full_name }}
+            <br>
+            <b>E-mail: </b> {{ user.email }}
+        </div>
+    </div>
+    <div class="col m8">
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti, mollitia ex? Sunt vitae dolore velit. Reiciendis mollitia, corrupti hic magnam eveniet soluta numquam dolorem autem molestias nisi blanditiis praesentium illum!</p>
+    </div>
+
+    <div class="modal" id="modal-change-avatar">
+        <div class="modal-content">
+            <h4>Selecione o arquivo de seu avatar!</h4>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="avatar-preview">
+                    <img src="https://wolper.com.au/wp-content/uploads/2017/10/image-placeholder.jpg" alt="" id="avatar-preview-img">
+                </div>
+                <div class="controls">
+                    <label class="btn">
+                        <span>Enviar arquivo</span>
+                        <input type="file" accept="image/png, image/jpeg" hidden>
+                    </label>
+
+                    <button type="submit">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endcomment %}
+{% endblock %}
+
+
+{% block end_scripts %}
+    <script>
+        var cropper_settled = false;
+        const avatarPreview = document.querySelector("#avatar-preview-img");
+        let cropper = null;
+
+        $("input[type='file']").one('change', () => {
+            cropper = new Cropper(avatarPreview, {
+                aspectRatio: 1 / 1,
+                viewMode: 1,
+            });
+        });
+        $("input[type='file']").change((event) => {
+            const reader = new FileReader();
+
+            reader.onload = () => {
+                cropper.replace(reader.result);
+            };
+
+            reader.readAsDataURL(event.target.files[0])
+
+            $('button').click((event) => {
+                event.preventDefault();
+                cropper.getCroppedCanvas().toBlob((blob) => {
+                    const formData = new FormData();
+                    formData.append("avatar", blob, "avatar.jpg");
+                    formData.append("csrfmiddlewaretoken", $('input[name="csrfmiddlewaretoken"]').val());
+                    $.ajax({
+                        url: window.location, 
+                        method: "POST",
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                    });
+                    $('.modal').modal('close');
+                   document.location.reload(true);
+                }, "image/jpeg");                
+            });
+        });
+
+    </script>
+{% endblock end_scripts %}
+    

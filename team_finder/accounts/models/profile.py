@@ -1,14 +1,15 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
-from tinder.models import Skill, SkillLevel, Group
+from tinder.models import Skill, SkillLevel
 
 
 def get_avatar_upload(instance, filename):
     return "{}/avatar.jpg".format(instance.owner.username)
 
+
 class Profile(models.Model):
     owner = models.OneToOneField('auth.User', on_delete=models.CASCADE)
-    shortbio = models.TextField(help_text='A short description of the person', default="This user's shortbio hasn't been defined yet.")
+    shortbio = models.TextField(help_text='A short description of the person', blank=True)
     skills = models.ManyToManyField(Skill, through=SkillLevel, related_name='profiles')
 
     avatar = models.ImageField(

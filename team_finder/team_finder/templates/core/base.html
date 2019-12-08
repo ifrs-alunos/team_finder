@@ -4,20 +4,13 @@
 	{% load static %}
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-    <meta name="description" content="Participe da 1ª Semana Acadêmica do IFRS - Campus Vacaria">
+    <meta name="description" content="Team Finder">
 
 	<title>{{ page_title }}</title>
 
-	<!--CSS: Materialize-->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
     <link rel="stylesheet" href="{% static 'core/css/base.css' %}">
-
-	<!--Materialize Icons-->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-	<!--JS: jQuery and Materialize-->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.js"></script>
 
 	{% block head_extra %}
 	{% endblock head_extra %}
@@ -25,27 +18,17 @@
 <body>
 	{% block header %}
 		<header>
-			<nav class="nav-extended">
-				<div class="nav-wrapper green darken-3 transparent">
-					<a href="" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-					<a href="{% url 'home' %}" class="left">
-                        <img class="responsive-img solid" src="{% static 'core/images/logo.png' %}" alt="SemAc">
-					</a>
-					<ul class="right hide-on-med-and-down" id="nav">
-
-                        {% if user.is_authenticated %}
-                            <li><a href="{% url 'review' %}">Minha Inscrição</a></li>
-                        {% else %}
-                            <li><a href="{% url 'register' %}">Inscrição</a></li>
-                        {% endif %}
-
-                        {% if user.is_authenticated %}
-                            <li><a href="{% url 'logout' %}"> <i class="material-icons">exit_to_app</i> </a></li>
-                        {% else %}
-                            <li><a href="{% url 'login' %}">Login</a></li>
-                        {% endif %}
-					</ul>
-				</div>
+            <h1><a href="{% url 'home' %}">Team Finder</a></h1>
+			<nav>
+                <ul>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'profile' %}">Meu perfil</a></li>
+                        <li><a href="{% url 'logout' %}">Sair</a></li>
+                    {% else %}
+                        <li class="login"><a href="{% url 'login' %}">Login</a></li>
+                        <li class="register"><a href="{% url 'register' %}">Cadastre-se!</a></li>
+                    {% endif %}
+                </ul>
 			</nav>
 		</header>
 	{% endblock header %}
@@ -64,13 +47,11 @@
 			</div>
 			<div class="footer-copyright">
 				<div class="container">
-					<p>&copy; 2019 - Diego Cardoso Nunes</p>
+					<p>&copy; 2019 - Diego Cardoso Nunes e Luís Eduardo Borges</p>
 				</div>
 			</div>
 		</footer>
 	{% endblock footer %}
-
-	<script src="{% static 'core/js/materialize_init.js' %}"></script>
 	{% block end_scripts %}
 	{% endblock end_scripts %}
 </body>

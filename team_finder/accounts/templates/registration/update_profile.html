@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="{% static 'accounts/css/update_profile.css' %}">
+{% endblock %}
+
+{% block main_content %}
+    <h2>Edite suas informações</h2>
+
+    <form action="" method="POST">
+        <div class="user-form">
+            {{ user_form }}
+        </div>
+        {{ profile_form }}
+        <button type="submit">Salvar</button>
+    </form>
+{% endblock %}

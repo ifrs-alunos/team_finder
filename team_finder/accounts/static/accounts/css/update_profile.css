@@ -1,0 +1,32 @@
+main {
+    padding: 1em;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+form input, form textarea {
+    padding: .5em;
+    border-radius: 5px;
+    border: 1px solid #999999;
+}
+
+form label {
+    margin-top: .5em;
+}
+
+form button {
+    align-self: start;
+    font-size: 20px;
+    padding: .2em;
+    border-radius: 5px;
+    border: 1px solid #999999;
+    background-color: var(--accent-color);
+}

@@ -1,67 +1,120 @@
-.hidden {
-	display: none;
-}
+* {
+	--primary-color: #40539b;
+	--secondary-color: #8869ff;
+	--accent-color: #ee8127;
 
-#search {
-	background-color: #ccc;
-	height: 2em;
-	border: none;
-	padding: .3em;
 	box-sizing: border-box;
-	border-radius: 5px;
-	width: 30ch;
+	margin: 0;
+	padding: 0;
+	outline: none;
+}
+a {
+	text-decoration: none;
+	color: currentColor;
 }
 
-.transparent {
-	opacity: .8;
-}
-
-.tamanho {
-	height: 24em;
-}
-
-.solid {
-	opacity: 1;
-	max-height: 3.6em;
-	box-sizing: border-box;
-	margin-top: 6px;
-}
-
-nav {
-	background-image: url('../images/header_background.jpg');
-}
-.error-message {
-	color: red;
-}
-
-.dropdown-content {
-	z-index: 1000000000;
-}
-
-@media (min-width: 992px) {
-	.carousel {
-		width: 80%;
-		margin: auto;
-	}
-}
-
-@media (max-width: 1250px) and (min-width: 992px){
-	.carousel {
-		margin-top: 6em;
-		width: 75%;
-	}
-}
-
-.carousel-container {
-	width: 100%;
+html, body {
+	height: 100%;
 }
 
 body {
+	display: grid;
+	grid-template-rows: min-content 1fr min-content;
+}
+
+header {
+	background-color: var(--primary-color);
 	display: flex;
-	min-height: 100vh;
-	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	color: white
+}
+header {
+	font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+	text-transform: uppercase;
+}
+
+header nav ul {
+	display: flex;
+	flex-flow: row wrap;
+	list-style: none;
+	align-items: center;
+	justify-items: end;
+}
+
+header nav ul li {
+	padding: 1em;
+	border-radius: 10px;
+}
+
+header nav ul li a {
+	text-decoration: none;
+	color: white;
+}
+
+header nav ul li:hover {
+	text-decoration: none;
+	background-color: rgba(255, 255, 255, .2);
+}
+
+header nav ul li.register {
+	border: 3px solid white;
+}
+
+header img {
+	height: 10px;
 }
 
 main {
-	flex: 1 0 auto;
+	background-color: #dddddd;
+	display: flex;
+	flex-direction: column;
+}
+
+@media (min-width: 670px){
+	main {
+		width: 90%;
+		justify-self: center;
+	}
+}
+
+@media (min-width: 1200px) {
+	main {
+		width: 80%;
+		justify-self: center;
+	}
+}
+
+.icon-input {
+	display: flex;
+	flex-direction: row;
+	padding: 1em;
+	align-items: center;
+}
+
+.icon-input i.material-icons {
+	background-color: darkgrey;
+	padding: 100%;
+	border-radius: 5px 0 0 5px;
+	position: relative;
+	top: .3px;
+}
+
+.icon-input input.styled {
+	font-size: 15px;
+	padding: 5px;
+	border-radius: 0 5px 5px 0;
+	outline: none;
+	border: 1px solid darkgray;
+}
+
+input.styled {
+	border-radius: 5px;
+	outline: none;
+	border: 1px solid darkgray;
+	width: 100%;
+}
+footer {
+	background-color: var(--primary-color);
 }
