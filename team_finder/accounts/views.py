@@ -25,7 +25,7 @@ def register_account(request):
             login(request, user)
             messages.success(request, "Cadastro realizado com sucesso!")
 
-            return redirect('match:main_menu')
+            return redirect('tinder:main_menu')
 
     else:
         user_form = CustomUserCreationForm()
