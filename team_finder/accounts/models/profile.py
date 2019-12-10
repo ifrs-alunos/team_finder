@@ -9,7 +9,7 @@ def get_avatar_upload(instance, filename):
 
 class Profile(models.Model):
     owner = models.OneToOneField('auth.User', on_delete=models.CASCADE)
-    shortbio = models.TextField(help_text='A short description of the person', blank=True)
+    shortbio = models.TextField(blank=True)
     skills = models.ManyToManyField(Skill, through=SkillLevel, related_name='profiles')
 
     def __str__(self):

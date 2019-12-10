@@ -1,48 +1,49 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import GroupForm
 from .models.groups import Group
-from .models.skill_levels import SkillLevel
 from .models.skills import Skill
 from django.contrib import messages
 
-#erro: manyrelatedmanager is not iterable na linha 12
+
 def my_menu(request):
+	search_term = request.GET.get('search')
+	user_profile = request.user.profile
 
-	profile = request.user.profile
-	groups_i_rule, groups_i_belong = [], []
+	leading = user_profile.leading.all()
+	member = user_profile.group_list.all()
 
-	for group in profile.group_list.all():
-		if group.leader == profile:
-			groups_i_rule.append(group)
-		else:
-			groups_i_belong.append(group)
+	if search_term:
+		leading = leading.filter(name__contains=search_term)
+		member = member.filter(name__contains=search_term)
 
-	context = {'profile':profile, 'leader':groups_i_rule, 'member':groups_i_belong}
-	return render(request, 'tinder/main_menu.html', context)
+	return render(request, 'tinder/main_menu.html', {'leading': leading, 'member': member})
+
 
 def create_group(request):
-	message = ''
 	if request.method == 'POST':
 		form = GroupForm(request.POST)
 		if form.is_valid():
-			form.save()
-			message.success(request, "GRUPO SALVO COM SUCESSO")
+			group = form.save(commit=False)
+			group.leader = request.user.profile
+			group.save()
+			messages.success(request, "GRUPO SALVO COM SUCESSO")
 			return redirect('tinder:main_menu')
 	else:
-		form = GroupForm()
+		form = GroupForm(initial={'leader': request.user.profile})
 
+	print('erro', form.errors)
 	context = {
 		'form': form,
 	}
 
-	return render(request, 'core/home.html', context)
+	return render(request, 'tinder/create_groups.html', context)
 
 def search_my_groups(request, name):
 	profile = request.user.profile
 	mygroups = profile.group_list
 	results = mygroups.filter(name__contains=name)
 	context = {'results':results}
-	return render(requets, 'core/home.html', context)
+	return render(request, 'core/home.html', context)
 
 def search_group(request, name):
 	results = Group.objects.filter(name__contains=name).exclude(private = True)
@@ -94,14 +95,14 @@ def join_group(request, group_id, userpass):
 	#verificando se o 
 	message = 'A operação não pode ser concluída. Confira os dados informados'
 	group = get_object_or_404(Group, pk=group_id)
-	if userpass == group.passwd:
+	if userpass == group.password:
 		group.members.add(request.user.profile)
 
 def rmv_fromgroup(request, group_id, userpass, member):
 	#tirar algm de um grupo ou a si mesmo
 	message = ''
 	group = get_object_or_404(Group, pk=group_id)
-	if (userpass == group.passwd) and (member in group.members):
+	if (userpass == group.password) and (member in group.members):
 		group.members.delete(member)
 		message = 'REMOÇÃO BEM-SUCEDIDA.'
 	else:

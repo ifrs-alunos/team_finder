@@ -1,0 +1,21 @@
+.group-creation {
+    display: flex;
+    padding: 2em;
+    width: 100%;
+    flex-direction: column;
+}
+
+form {
+    width: 50%;
+    justify-content: start;
+}
+
+.private-box {
+    display: flex;
+    align-items: center;
+}
+
+button {
+    margin-top: 1em;
+}
+
