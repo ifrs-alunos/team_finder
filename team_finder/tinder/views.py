@@ -1,10 +1,48 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from .forms import GroupForm
+from .models.groups import Group
+from .models.skill_levels import SkillLevel
+from .models.skills import Skill
 
-from .models import *
-# Create your views here.
-#term = request.GET.get("term")
-#	group.objects.filter(name__contains=term)
+#erro: manyrelatedmanager is not iterable na linha 12
+def my_menu(request):
+	pass
+"""	
+	profile = request.user.profile
+	groups_i_rule, groups_i_belong = [], []
 
+	for group in profile.group_list:
+		if group.leader == profile:
+			groups_i_rule.append(group)
+		else:
+			groups_i_belong.append(group)
+
+	context = {'profile':profile, 'leader':groups_i_rule, 'member':groups_i_belong}
+	return render(request, 'tinder/grupos.html', context)
+"""
+def create_group(request):
+	message = ''
+	if request.method == 'POST':
+		form = GroupForm(request.POST)
+		if form.is_valid():
+			form.save()
+			message = "GRUPO SALVO COM SUCESSO"
+	else:
+		form = GroupForm()
+
+	context = {
+		'form': form,
+		'message':message,
+		}
+
+	return render(request, 'core/home.html', context)
+
+def search_my_groups(request, name):
+	profile = request.user.profile
+	mygroups = profile.group_list
+	results = mygroups.filter(name__contains=name)
+	context = {'results':results}
+	return render(requets, 'core/home.html', context)
 
 def search_group(request, name):
 	results = Group.objects.filter(name__contains=name).exclude(private = True)
@@ -52,11 +90,23 @@ def match_withlist(request):
 
 	return render(request, 'tinder/grupos.html', {'best_groups': best_groups})
 
-
-
 def join_group(request, group_id, userpass):
 	#verificando se o 
 	message = 'A operação não pode ser concluída. Confira os dados informados'
 	group = get_object_or_404(Group, pk=group_id)
 	if userpass == group.passwd:
 		group.members.add(request.user.profile)
+
+def rmv_fromgroup(request, group_id, userpass, member):
+	#tirar algm de um grupo ou a si mesmo
+	message = ''
+	group = get_object_or_404(Group, pk=group_id)
+	if (userpass == group.passwd) and (member in group.members):
+		group.members.delete(member)
+		message = 'REMOÇÃO BEM-SUCEDIDA.'
+	else:
+		message = 'IMPOSSÍVEL REALIZAR A OPERAÇÃO SOLICITADA'
+
+	context = {'message':message}
+	return render(request, 'core/home.html', context)
+

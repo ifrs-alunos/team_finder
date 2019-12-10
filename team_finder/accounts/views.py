@@ -57,7 +57,6 @@ def edit_profile(request):
 
     return render(request, 'registration/update_profile.html', {'profile_form': profile_form, 'user_form': user_form})
 
-
 def change_avatar(request, current_view):
     if request.method == 'POST':
         form = AvatarChangeForm(request.POST, request.FILES)
