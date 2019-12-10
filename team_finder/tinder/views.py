@@ -3,37 +3,37 @@ from .forms import GroupForm
 from .models.groups import Group
 from .models.skill_levels import SkillLevel
 from .models.skills import Skill
+from django.contrib import messages
 
 #erro: manyrelatedmanager is not iterable na linha 12
 def my_menu(request):
-	pass
-"""	
+
 	profile = request.user.profile
 	groups_i_rule, groups_i_belong = [], []
 
-	for group in profile.group_list:
+	for group in profile.group_list.all():
 		if group.leader == profile:
 			groups_i_rule.append(group)
 		else:
 			groups_i_belong.append(group)
 
 	context = {'profile':profile, 'leader':groups_i_rule, 'member':groups_i_belong}
-	return render(request, 'tinder/grupos.html', context)
-"""
+	return render(request, 'tinder/main_menu.html', context)
+
 def create_group(request):
 	message = ''
 	if request.method == 'POST':
 		form = GroupForm(request.POST)
 		if form.is_valid():
 			form.save()
-			message = "GRUPO SALVO COM SUCESSO"
+			message.success(request, "GRUPO SALVO COM SUCESSO")
+			return redirect('tinder:main_menu')
 	else:
 		form = GroupForm()
 
 	context = {
 		'form': form,
-		'message':message,
-		}
+	}
 
 	return render(request, 'core/home.html', context)
 

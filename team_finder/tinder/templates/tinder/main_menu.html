@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="{% static 'accounts/css/review.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.5/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.5/cropper.min.js"></script>
+{% endblock head_extra %}
+
+{% block main_content %}
+    <div class="profile-container">
+        <div class="profile-content">
+            <div class="info">
+                <div class="heading">
+                    <h2>Perfil</h2>
+                    <a class="edit-btn" href="{% url 'edit_profile' %}">Editar</a>
+                </div>
+                <img src="{{ user.profile.avatar.url }}" alt="">
+                <p>{{ user.first_name }}</p>
+                <p>{{ user.profile.shortbio }}</p>
+            </div>
+            <div class="classes">
+                <div class="heading">
+                    <h2>Meus grupos</h2>
+                    <form action="" class="search-form">
+                        <input type="text" class="group-search" placeholder="Pesquisa por grupos..." name="search">
+                        <button><i class="material-icons">search</i></button>
+                    </form>
+                    <a href="{% url 'tinder:create_group' %}">Criar Grupo<i class="material-icons">add</i></a>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Grupo</th>
+                            <th>Líder</th>
+                            <th>Número de membros</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for group in profile.group_list.all %}
+                    	<tr>
+                    		<td>{{group.name}}</td>
+                    		<td>{{group.leader}}</td>
+                    		<td>{{group.members.all|length}}</td>
+                    	</tr>
+					{% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

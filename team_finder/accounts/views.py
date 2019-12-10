@@ -25,7 +25,7 @@ def register_account(request):
             login(request, user)
             messages.success(request, "Cadastro realizado com sucesso!")
 
-            return redirect('profile')
+            return redirect('match:main_menu')
 
     else:
         user_form = CustomUserCreationForm()
@@ -50,10 +50,16 @@ def review_account(request):
 
 def edit_profile(request):
     if request.method == 'POST':
-        pass
+        user_form = UserEditForm(request.POST, instance=request.user)
+        profile_form = ProfileEditForm(request.POST, instance=request.user.profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect('tinder:main_menu')
     else:
-        user_form = UserEditForm()
-        profile_form = ProfileEditForm()
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
 
     return render(request, 'registration/update_profile.html', {'profile_form': profile_form, 'user_form': user_form})
 

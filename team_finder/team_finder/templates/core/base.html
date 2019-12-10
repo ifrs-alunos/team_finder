@@ -22,7 +22,7 @@
 			<nav>
                 <ul>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'profile' %}">Meu perfil</a></li>
+                        <li><a href="{% url 'tinder:main_menu' %}">Meu perfil</a></li>
                         <li><a href="{% url 'logout' %}">Sair</a></li>
                     {% else %}
                         <li class="login"><a href="{% url 'login' %}">Login</a></li>
