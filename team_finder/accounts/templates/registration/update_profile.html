@@ -9,6 +9,7 @@
     <h2>Edite suas informações</h2>
 
     <form action="" method="POST">
+    	{% csrf_token %}
         <div class="user-form">
             {{ user_form }}
         </div>

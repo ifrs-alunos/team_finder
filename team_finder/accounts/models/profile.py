@@ -12,13 +12,6 @@ class Profile(models.Model):
     shortbio = models.TextField(help_text='A short description of the person', blank=True)
     skills = models.ManyToManyField(Skill, through=SkillLevel, related_name='profiles')
 
-    avatar = models.ImageField(
-        upload_to=get_avatar_upload, 
-        validators=[
-            FileExtensionValidator(allowed_extensions=['png', 'jpg'])
-        ], 
-    )
-
     def __str__(self):
         return self.owner.get_full_name() or self.owner.username
 

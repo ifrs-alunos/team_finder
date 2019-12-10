@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
 
-from .forms import ProfileCreationForm, LoginForm, AvatarChangeForm, CustomUserCreationForm, ProfileEditForm, \
+from .forms import ProfileCreationForm, LoginForm, CustomUserCreationForm, ProfileEditForm, \
     UserEditForm
 
 
@@ -25,7 +25,7 @@ def register_account(request):
             login(request, user)
             messages.success(request, "Cadastro realizado com sucesso!")
 
-            return redirect('review')
+            return redirect('profile')
 
     else:
         user_form = CustomUserCreationForm()

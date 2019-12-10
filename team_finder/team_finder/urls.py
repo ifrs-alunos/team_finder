@@ -22,5 +22,6 @@ from . import views, settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
+    path('tinder/', include('tinder.urls')),
     path('', views.homepage, name="home"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
