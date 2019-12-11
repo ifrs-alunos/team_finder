@@ -47,6 +47,7 @@
                                     <td>{{group.name}}</td>
                                     <td>{{group.leader}}</td>
                                     <td>{{group.get_number_of_members}}</td>
+                                    <td><a href=""><i class="material-icons">visibility</i></a></td>
                                 </tr>
                             {% endfor %}
                             {% for group in member %}
@@ -54,6 +55,7 @@
                                     <td>{{ group.name }}</td>
                                     <td>{{ group.leader }}</td>
                                     <td>{{ group.get_number_of_members}}</td>
+                                    <td><a href="{% url 'tinder:view_group' group.id %}"><i class="material-icons">visibility</i></a></td>
                                 </tr>
                             {% endfor %}
                         {% else %}

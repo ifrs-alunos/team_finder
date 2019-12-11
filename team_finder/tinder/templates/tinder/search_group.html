@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block head_extra %}
+	<link rel="stylesheet" href="{% static 'tinder/css/review.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.5/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.5/cropper.min.js"></script>
+{% endblock head_extra %}
+
+{% block main_content %}
+	<div class="classes">
+        <div class="heading">
+            <h2>Resultados da busca</h2>
+            <div class="menus">
+                <a href="{% url 'tinder:create_group' %}"><i class="material-icons">add</i>Criar Grupo</a>
+                <form class="search-form default">
+                    <input type="text" class="group-search" placeholder="Pesquisa por grupos..." name="search">
+                    <button><i class="material-icons">search</i></button>
+                </form>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Grupo</th>
+                    <th>Líder</th>
+                    <th>Número de membros</th>
+                    <th>Acessar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if groups %}
+                    {% for group in groups %}
+                        <tr>
+                            <td>{{group.name}}</td>
+                            <td>{{group.leader}}</td>
+                            <td>{{group.get_number_of_members}}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td>Não há nenhum grupo para mostar😢<br>Mas você pode criá-lo!</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock main_content %}

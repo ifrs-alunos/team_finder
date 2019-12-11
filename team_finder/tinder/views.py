@@ -49,10 +49,15 @@ def search_my_groups(request, name):
 
 
 @login_required
-def search_group(request, name):
-	results = Group.objects.filter(name__contains=name).exclude(private = True)
-	context = {'results':results}
-	return render(request, 'core/home.html' , context)
+def search_group(request):
+	search_term = request.GET.get('search')
+	groups = Group.objects.all().exclude(private=True)
+
+	if search_term:
+		groups = groups.filter(name__contains=search_term)
+	
+	context = {'groups':groups}
+	return render(request, 'tinder/search_group.html' , context)
 
 @login_required
 def search_person(request, parameter, term):	
