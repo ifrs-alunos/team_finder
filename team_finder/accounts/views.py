@@ -3,7 +3,6 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
-
 from .forms import ProfileCreationForm, LoginForm, CustomUserCreationForm, ProfileEditForm, \
     UserEditForm
 
@@ -44,10 +43,6 @@ class MyLogoutView(LogoutView):
 
 
 @login_required
-def review_account(request):
-    return render(request, 'registration/review.html')
-
-
 def edit_profile(request):
     if request.method == 'POST':
         user_form = UserEditForm(request.POST, instance=request.user)
@@ -62,12 +57,3 @@ def edit_profile(request):
         profile_form = ProfileEditForm(instance=request.user.profile)
 
     return render(request, 'registration/update_profile.html', {'profile_form': profile_form, 'user_form': user_form})
-
-def change_avatar(request, current_view):
-    if request.method == 'POST':
-        form = AvatarChangeForm(request.POST, request.FILES)
-        if form.is_valid():
-            request.user.profile.avatar = form.cleaned_data['avatar']
-            request.user.profile.save()
-            messages.success(request, 'Atividade')
-    return redirect(current_view)
