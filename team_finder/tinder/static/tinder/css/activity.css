@@ -2,3 +2,17 @@ tfoot td {
     display: flex;
     align-items: center;
 }
+
+select {
+    padding: .5em;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.classes {
+    width: 50%;
+}
+
+.classes button {
+    margin-top: 10px;
+}

@@ -31,13 +31,20 @@
                         </form>
                     </div>
                 </div>
+                <div class="messages">
+                    {% if messages %}
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    {% endif %}
+                </div>
                 <table>
                     <thead>
                         <tr>
                             <th>Grupo</th>
                             <th>Líder</th>
                             <th>Número de membros</th>
-                            <th>Acessar</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,20 +54,38 @@
                                     <td>{{group.name}}</td>
                                     <td>{{group.leader}}</td>
                                     <td>{{group.get_number_of_members}}</td>
-                                    <td><a href="{% url 'tinder:detail_group' group.id %}"><i class="material-icons">visibility</i></a></td>
+                                    <td>
+                                        <a href="{% url 'tinder:detail_group' group.id %}"><i class="material-icons">visibility</i></a>
+                                        {% if group.leader == user.profile %}
+                                            <a href="{% url 'tinder:edit_group' group.id%}"><i class="material-icons">edit</i></a>
+                                            <a href="{% url 'tinder:delete_group' group.id%}"><i class="material-icons">delete</i></a>
+                                        {% endif %}
+                                    </td>
                                 </tr>
                             {% endfor %}
                             {% for group in member %}
                                 <tr>
-                                    <td>{{ group.name }}</td>
+                                    <td>
+                                        <a href="{% url 'tinder:detail_group' group.id%}">
+                                            {{ group.name }}
+                                        </a>
+                                    </td>
                                     <td>{{ group.leader }}</td>
                                     <td>{{ group.get_number_of_members}}</td>
-                                    <td><a href="{% url 'tinder:detail_group' group.id %}"><i class="material-icons">visibility</i></a></td>
+                                    <td>
+                                        {% if group.leader == user.profile %}
+                                            <a href="{% url 'tinder:edit_group' group.id%}"><i class="material-icons">edit</i></a>
+                                        {% endif %}
+                                        <a href="{% url 'tinder:detail_group' group.id%}"><i class="material-icons">visibility</i></a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         {% else %}
                             <tr>
                                 <td>Não há nenhum grupo para mostar😢<br>Mas você pode criá-lo!</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         {% endif %}
                     </tbody>

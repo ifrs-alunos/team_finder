@@ -21,10 +21,13 @@ class GroupForm(forms.ModelForm):
 			'private': 'Privado?',
 			'password': 'Senha',
 		}
+		widgets = {
+			'password': forms.PasswordInput
+		}
 
 	def clean(self):
 		cleaned_data = super(GroupForm, self).clean()
-		print(cleaned_data)
+
 		password = cleaned_data['password']
 		password2 = cleaned_data['password2']
 		private = cleaned_data['private']
@@ -54,7 +57,11 @@ def get_skill_level_formset():
 		Profile,
 		SkillLevel,
 		form=SkillLevelForm,
-		extra=len(SkillLevel.objects.all()),
+		extra=0,
 		max_num=len(SkillLevel.objects.all()),
 		can_delete=False,
 	)
+
+
+class PasswordForm(forms.Form):
+	password = forms.CharField(widget=forms.PasswordInput, label="Senha de acesso")

@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block main_content %}
+    <h1>{{ profile }}</h1>
+
+    <h3>Habilidades:</h3>
+    <ul>
+    {% for skilllevel in profile.skilllevel_set.all %}
+        <li>{{ skilllevel.skill }}: {{ skilllevel.get_level_display }}</li>
+    {% endfor %}
+    </ul>
+
+    <h3>Contato:</h3>
+    <p>Email: {{ profile.owner.email }}</p>
+{% endblock %}

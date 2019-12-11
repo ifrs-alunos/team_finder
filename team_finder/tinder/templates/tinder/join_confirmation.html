@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+{% block main_content %}
+    <h1>Entrar no grupo {{ group.name }}?</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <span class="{{ message.tags }}">{{ message }}</span>
+        {% endfor %}
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        {% if group.private %}
+            {{ form }}
+        {% endif %}
+        <button>Entrar</button>
+    </form>
+{% endblock %}

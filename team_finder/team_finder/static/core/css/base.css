@@ -120,7 +120,21 @@ form:not(.default) button {
 }
 
 span.error {
-	color: red;
+	color: white;
+	background-color: darkred;
+	width: fit-content;
+	padding: .25em;
+	border: 2px solid indianred;
+	border-radius: 5px;
+}
+
+span.success {
+	color: white;
+	background-color: darkgreen;
+	width: fit-content;
+	padding: .25em;
+	border: 2px solid forestgreen;
+	border-radius: 5px;
 }
 
 span.error ul {

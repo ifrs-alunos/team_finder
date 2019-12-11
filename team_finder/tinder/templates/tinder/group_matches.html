@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="{% static 'tinder/css/review.css' %}">
+{% endblock %}
+
+{% block main_content %}
+    <h2>Melhores duplas no grupo {{ group.name }}</h2>
+
+    <div class="classes">
+        <table>
+            <thead>
+                <tr>
+                    <td>Dupla</td>
+                    <td>Pontuação</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for best_group in best_groups %}
+                    <tr>
+                        <td>{{ best_group }}</td>
+                        <td>{{ best_group.points }}</td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -4,32 +4,69 @@
 {% block head_extra %}
     <link rel="stylesheet" href="{% static 'tinder/css/review.css' %}">
     <link rel="stylesheet" href="{% static 'tinder/css/activity.css' %}">
+    <script>
+        const skills = [{% for skill in skills %}{name:"{{ skill.name }}", value:{{ skill.id }}},{% endfor %}];
+        const levels = [{% for level in levels %}{name:"{{ level.1 }}", value:{{ level.0 }}},{% endfor %}];
+    </script>
 {% endblock %}
 
 {% block main_content %}
     <h2>Escolha as habilidades necessárias para realizar a tarefa!</h2>
-    <form action="{% url 'tinder:match' group.id %}">
-        <div class="classes">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Habilidade</th>
-                        <th>Nível</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            {{ form.select }}
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td><i class="material-icons">add</i>Adicionar Habilidade</td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-     </form>
+    <div class="classes">
+        <table>
+            <thead>
+                <tr>
+                    <th>Habilidade</th>
+                    <th>Nível</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td id="add"><i class="material-icons">add</i>Adicionar Habilidade</td>
+                </tr>
+            </tfoot>
+        </table>
+        <form action="{% url 'tinder:match' group.id %}">
+            <input type="text" name="skills" hidden>
+            <button>Buscar</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block end_scripts %}
+    <script>
+        $("#add").click(() => {
+           $('tbody').append($(`
+                <tr>
+                    <td>
+                        <select name='skill'>
+                            ${skills.map(item => `<option value=${item.value}>${item.name}</option>`)}
+                        </select>
+                    </td>
+                    <td>
+                        <select name='level'>
+                            ${levels.map(item => `<option value=${item.value}>${item.name}</option>`)}
+                        </select>
+                    </td>
+                </tr>
+           `));
+        });
+
+        $('form button').click((event) => {
+            event.preventDefault();
+            const skills = {};
+            $('tbody tr').map((idx, item) => {
+                const skill = $(item).find('select[name="skill"]');
+                const level = $(item).find('select[name="level"]');
+
+                skills[skill.val()] = level.val();
+            });
+            $('input[name="skills"]').val(JSON.stringify(skills));
+            $('form').submit();
+        });
+
+        $(() => $("#add").click())
+    </script>
 {% endblock %}

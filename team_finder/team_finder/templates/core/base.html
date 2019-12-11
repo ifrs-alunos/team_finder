@@ -23,6 +23,7 @@
                 <ul>
                     {% if user.is_authenticated %}
                         {% if user.first_name %}
+                            <li><a href="{% url 'tinder:search_group' %}">Buscar por grupo</a></li>
                             <li><a href="{% url 'tinder:main_menu' %}">Meu Espaço</a></li>
                         {% endif %}
                         <li><a href="{% url 'logout' %}">Sair</a></li>

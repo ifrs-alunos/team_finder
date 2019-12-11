@@ -4,9 +4,11 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.contrib import messages
+from django.views.generic import DetailView
+
+from accounts.models import Profile
 from tinder.forms import get_skill_level_formset
-from .forms import ProfileCreationForm, LoginForm, CustomUserCreationForm, ProfileEditForm, \
-    UserEditForm
+from .forms import ProfileCreationForm, LoginForm, CustomUserCreationForm, ProfileEditForm, UserEditForm
 
 
 def register_account(request):
@@ -19,6 +21,9 @@ def register_account(request):
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
+            user.email = user.username
+            user.save()
+
             profile = profile_form.save(commit=False)
             profile.owner = user
             profile.save()
@@ -71,3 +76,7 @@ def edit_profile(request):
         'skill_formset': skill_formset
     }
     return render(request, 'registration/update_profile.html', context)
+
+
+class DetailProfile(DetailView):
+    model = Profile

@@ -14,9 +14,15 @@
     <br>
     <div class="classes">
         <div class="heading">
+
             <div class="menus">
-                <a href="{% url 'tinder:activity-group' group.id %}"><i class="material-icons">ballot</i>Buscar duplas</a>
+                {% if user.profile in group.members.all or user.profile == group.leader %}
+                    <a href="{% url 'tinder:activity-group' group.id %}"><i class="material-icons">ballot</i>Buscar duplas</a>
+                {% else %}
+                    <a href="{% url 'tinder:join_group' group.id%}"><i class="material-icons">person_add</i>Juntar-se no grupo</a>
+                {% endif %}
             </div>
+
         </div>
         <table>
             <thead>
