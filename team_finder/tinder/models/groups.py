@@ -1,7 +1,6 @@
 from tinder.models.base import *
 from django.utils import timezone
 
-
 class Group(BaseModel):
 	"""docstring for Group"""
 	name = models.CharField(max_length=100)

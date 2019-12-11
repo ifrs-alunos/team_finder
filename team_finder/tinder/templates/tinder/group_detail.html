@@ -9,6 +9,7 @@
     <h2>{{ group.name }}</h2>
     Líder: {{ group.leader }}<br>
     Número de membros: {{ group.get_number_of_members }}
+    Fundação: {{ group.foundation }}
     <br>
     <br>
     <div class="classes">
@@ -27,7 +28,7 @@
                 <tr>
                     <td>{{ group.leader }} (Líder)</td>
                 </tr>
-                {% for foo in group.members.all %}
+                {% for member in group.members.all %}
                     <tr>
                         <td>{{ member }}</td>
                     </tr>
