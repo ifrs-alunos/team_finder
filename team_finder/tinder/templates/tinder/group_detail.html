@@ -1,0 +1,38 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="{% static 'tinder/css/review.css' %}">
+{% endblock %}
+
+{% block main_content %}
+    <h2>{{ group.name }}</h2>
+    Líder: {{ group.leader }}<br>
+    Número de membros: {{ group.get_number_of_members }}
+    <br>
+    <br>
+    <div class="classes">
+        <div class="heading">
+            <div class="menus">
+                <a href="{% url 'tinder:activity-group' group.id %}"><i class="material-icons">ballot</i>Buscar duplas</a>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Integrantes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ group.leader }} (Líder)</td>
+                </tr>
+                {% for foo in group.members.all %}
+                    <tr>
+                        <td>{{ member }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

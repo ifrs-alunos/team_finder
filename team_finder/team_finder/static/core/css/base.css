@@ -67,9 +67,10 @@ header img {
 }
 
 main {
-	background-color: #dddddd;
+	/*background-color: #dddddd;*/
 	display: flex;
 	flex-direction: column;
+	padding: 1em 0;
 }
 
 @media (min-width: 670px){
