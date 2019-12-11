@@ -125,10 +125,10 @@ def join_group(request, group_id):
     access = False
     if request.method == 'POST':
         if group.private:
-            form = PasswordForm()
+            form = PasswordForm(request.POST)
             if form.is_valid():
                 userpass = form.cleaned_data['password']
-                if userpass != group.password:
+                if userpass == group.password:
                     access = True
         else:
             access = True
@@ -167,7 +167,7 @@ def activity_group_match(request, pk):
     return render(request, 'tinder/activity.html', {'group': group, 'skills': skills, 'levels': levels})
 
 
-class DeleteGroup(UserPassesTestMixin, SuccessMessageMixin, DeleteView):
+class DeleteGroup(UserPassesTestMixin, DeleteView):
     model = Group
     success_url = reverse_lazy('tinder:main_menu')
     success_message = 'Grupo deletado!'

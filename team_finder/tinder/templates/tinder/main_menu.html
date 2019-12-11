@@ -65,11 +65,7 @@
                             {% endfor %}
                             {% for group in member %}
                                 <tr>
-                                    <td>
-                                        <a href="{% url 'tinder:detail_group' group.id%}">
-                                            {{ group.name }}
-                                        </a>
-                                    </td>
+                                    <td>{{ group.name }}</td>
                                     <td>{{ group.leader }}</td>
                                     <td>{{ group.get_number_of_members}}</td>
                                     <td>

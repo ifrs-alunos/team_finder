@@ -4,13 +4,13 @@
     <h1>Entrar no grupo {{ group.name }}?</h1>
     {% if messages %}
         {% for message in messages %}
-            <span class="{{ message.tags }}">{{ message }}</span>
+            <span class="{{ message.tags }} tag">{{ message }}</span>
         {% endfor %}
     {% endif %}
     <form method="POST">
         {% csrf_token %}
         {% if group.private %}
-            {{ form }}
+            {{ form.as_p }}
         {% endif %}
         <button>Entrar</button>
     </form>

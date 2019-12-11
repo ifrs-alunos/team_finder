@@ -8,7 +8,7 @@
 {% block main_content %}
     <h2>{{ group.name }}</h2>
     Líder: {{ group.leader }}<br>
-    Número de membros: {{ group.get_number_of_members }}
+    Número de membros: {{ group.get_number_of_members }}<br>
     Fundação: {{ group.foundation }}
     <br>
     <br>
@@ -22,8 +22,15 @@
                     <a href="{% url 'tinder:join_group' group.id%}"><i class="material-icons">person_add</i>Juntar-se no grupo</a>
                 {% endif %}
             </div>
-
+            <div class="messages">
+                {% if messages %}
+                    {% for message in messages %}
+                        <span class="tag {{ message.tags }}">{{ message }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
         </div>
+
         <table>
             <thead>
                 <tr>

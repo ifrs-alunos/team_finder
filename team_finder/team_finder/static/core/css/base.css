@@ -119,22 +119,24 @@ form:not(.default) button {
     cursor: pointer;
 }
 
-span.error {
-	color: white;
-	background-color: darkred;
+span.tag {
 	width: fit-content;
 	padding: .25em;
-	border: 2px solid indianred;
 	border-radius: 5px;
+	border-width: 2px;
+	border-style: solid;
 }
 
-span.success {
+span.tag.error {
+	color: white;
+	background-color: darkred;
+	border-color: indianred;
+}
+
+span.tag.success {
 	color: white;
 	background-color: darkgreen;
-	width: fit-content;
-	padding: .25em;
-	border: 2px solid forestgreen;
-	border-radius: 5px;
+	border-color: forestgreen;
 }
 
 span.error ul {
