@@ -1,4 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import DetailView
+
+from accounts.models import Profile
 from .forms import GroupForm
 from .models.groups import Group
 from .models.skills import Skill
@@ -39,29 +42,17 @@ def create_group(request):
 	return render(request, 'tinder/create_groups.html', context)
 
 
-def search_my_groups(request, name):
-	profile = request.user.profile
-	mygroups = profile.group_list
-	results = mygroups.filter(name__contains=name)
-	context = {'results':results}
-	return render(request, 'core/home.html', context)
-
-
 def search_group(request, name):
 	results = Group.objects.filter(name__contains=name).exclude(private = True)
 	context = {'results':results}
 	return render(request, 'core/home.html' , context)
 
+
 def search_person(request, parameter, term):	
 	results = Profile.objects.filter(**{'parameter': term})
-	context = {'results':results}
-	return redner(request, 'core/home.html', context)
+	context = {'results': results}
+	return render(request, 'core/home.html', context)
 
-def match_ingroup(request, group, skill, level):
-	group_members = Profile.objects.filter(group_list=group)
-	results = group_members.filter(skilllevel_set__skill=skill, skilllevel_set__level = level)
-	context = {'results':results}
-	return redner(request, 'core/home.html', context)
 
 #não abrir a jaula!
 def match_withlist(request):
@@ -93,12 +84,14 @@ def match_withlist(request):
 
 	return render(request, 'tinder/grupos.html', {'best_groups': best_groups})
 
+
 def join_group(request, group_id, userpass):
 	#verificando se o 
 	message = 'A operação não pode ser concluída. Confira os dados informados'
 	group = get_object_or_404(Group, pk=group_id)
 	if userpass == group.password:
 		group.members.add(request.user.profile)
+
 
 def rmv_fromgroup(request, group_id, userpass, member):
 	#tirar algm de um grupo ou a si mesmo
@@ -110,6 +103,14 @@ def rmv_fromgroup(request, group_id, userpass, member):
 	else:
 		message = 'IMPOSSÍVEL REALIZAR A OPERAÇÃO SOLICITADA'
 
-	context = {'message':message}
+	context = {'message': message}
 	return render(request, 'core/home.html', context)
 
+
+class DetailGroup(DetailView):
+	model = Group
+
+
+def activity_group_match(request, pk):
+	group = get_object_or_404(Group, id=pk)
+	return render(request, 'tinder/activity.html', {'group': group})

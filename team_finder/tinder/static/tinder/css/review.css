@@ -108,3 +108,8 @@ a.edit-btn {
 .menus a i {
     color: green;
 }
+
+table tr td a {
+    text-decoration: underline;
+    color: blue;
+}
