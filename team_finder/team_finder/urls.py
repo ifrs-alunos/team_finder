@@ -25,3 +25,4 @@ urlpatterns = [
     path('match/', include('tinder.urls')),
     path('', views.homepage, name="home"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+ 

@@ -4,9 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.contrib import messages
-
 from tinder.forms import get_skill_level_formset
-
 from .forms import ProfileCreationForm, LoginForm, CustomUserCreationForm, ProfileEditForm, \
     UserEditForm
 
@@ -63,7 +61,7 @@ def edit_profile(request):
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
         skill_formset = get_skill_level_formset()(instance=request.user.profile)
-
+    
     skill_names = {skill.id: skill.name for skill in request.user.profile.get_skills()}
 
     context = {

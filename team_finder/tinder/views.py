@@ -6,6 +6,8 @@ from .forms import GroupForm
 from .models.groups import Group
 from .models.skills import Skill
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseNotAllowed
 
 
 def my_menu(request):
@@ -21,7 +23,7 @@ def my_menu(request):
 
 	return render(request, 'tinder/main_menu.html', {'leading': leading, 'member': member})
 
-
+@login_required
 def create_group(request):
 	if request.method == 'POST':
 		form = GroupForm(request.POST)
@@ -47,14 +49,15 @@ def search_group(request, name):
 	context = {'results':results}
 	return render(request, 'core/home.html' , context)
 
-
-def search_person(request, parameter, term):	
+@login_required
+def search_person(request, parameter, term):
 	results = Profile.objects.filter(**{'parameter': term})
 	context = {'results': results}
 	return render(request, 'core/home.html', context)
 
 
 #não abrir a jaula!
+@login_required #precisa proteger p/ usuario não acessar grupos que não faz parte
 def match_withlist(request):
 	group_id = request.GET.get('group_id')
 	skills_list = request.GET.get('skills').split(',')
@@ -85,19 +88,65 @@ def match_withlist(request):
 	return render(request, 'tinder/grupos.html', {'best_groups': best_groups})
 
 
+
+""" Groups CRUD """
+@login_required
+def create_group(request):
+	message = ''
+	if request.method == 'POST':
+		form = GroupForm(request.POST)
+		if form.is_valid():
+			form.save()
+			messages.success(request, "GRUPO SALVO COM SUCESSO")
+			return redirect('tinder:main_menu')
+	else:
+		form = GroupForm()
+
+	context = {
+		'form': form,
+	}
+
+	return render(request, 'core/home.html', context)
+
+@login_required
+def edit_group(request, group_id):
+	group = get_object_or_404(Group, pk=group_id)
+	if group.leader == request.user.profile:
+		if request.method == 'POST':
+			group_form= GroupForm(request.POST, instance=group)
+			if group_form.is_valid():
+				group_form.save()
+				return redirect('tinder:main_menu')
+		else:
+			group_form = GroupForm(request.POST, instance=group)
+	else:
+		return HttpResponseNotAllowed()
+
+	return render(request, 'tinder/edit_group.html', {'group_form': group_form})
+
+@login_required
+def delete_group(request, group_id):
+	group = get_object_or_404(Group, pk=group_id)
+	if request.user.profile == group.leader:
+		group.delete()
+	else:
+		return HttpResponseNotAllowed()
+
+""" USERS relations inside groups """
+
+@login_required
 def join_group(request, group_id, userpass):
-	#verificando se o 
-	message = 'A operação não pode ser concluída. Confira os dados informados'
 	group = get_object_or_404(Group, pk=group_id)
 	if userpass == group.password:
 		group.members.add(request.user.profile)
 
 
+@login_required
 def rmv_fromgroup(request, group_id, userpass, member):
 	#tirar algm de um grupo ou a si mesmo
 	message = ''
 	group = get_object_or_404(Group, pk=group_id)
-	if (userpass == group.password) and (member in group.members):
+	if (user.profile == group.leader) and (userpass == group.passwd) and (member in group.members):
 		group.members.delete(member)
 		message = 'REMOÇÃO BEM-SUCEDIDA.'
 	else:
@@ -114,3 +163,4 @@ class DetailGroup(DetailView):
 def activity_group_match(request, pk):
 	group = get_object_or_404(Group, id=pk)
 	return render(request, 'tinder/activity.html', {'group': group})
+#Implementar DM entre usuários?
