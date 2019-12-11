@@ -10,7 +10,9 @@ form.login-form {
     width: 30%;
     display: flex;
     flex-direction: column;
+    color: white;
 }
+
 form.login-form label {
     margin-top: 15px;
     font-size: 20px;

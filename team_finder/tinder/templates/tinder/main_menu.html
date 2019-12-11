@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block head_extra %}
-    <link rel="stylesheet" href="{% static 'accounts/css/review.css' %}">
+    <link rel="stylesheet" href="{% static 'tinder/css/review.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.5/cropper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.5/cropper.min.js"></script>
 {% endblock head_extra %}
@@ -23,11 +23,13 @@
             <div class="classes">
                 <div class="heading">
                     <h2>Meus grupos</h2>
-                    <form action="" class="search-form">
-                        <input type="text" class="group-search" placeholder="Pesquisa por grupos..." name="search">
-                        <button><i class="material-icons">search</i></button>
-                    </form>
-                    <a href="{% url 'tinder:create_group' %}">Criar Grupo<i class="material-icons">add</i></a>
+                    <div class="menus">
+                        <a href="{% url 'tinder:create_group' %}"><i class="material-icons">add</i>Criar Grupo</a>
+                        <form class="search-form default">
+                            <input type="text" class="group-search" placeholder="Pesquisa por grupos..." name="search">
+                            <button><i class="material-icons">search</i></button>
+                        </form>
+                    </div>
                 </div>
                 <table>
                     <thead>
@@ -39,14 +41,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for group in profile.group_list.all %}
-                    	<tr>
-                    		<td>{{group.name}}</td>
-                    		<td>{{group.leader}}</td>
-                    		<td>{{group.members.all|length}}</td>
-                            <td><a href="">BUTTON</a></td>
-                    	</tr>
-					{% endfor %}
+                        {% if leading or member %}
+                            {% for group in leading %}
+                                <tr>
+                                    <td>{{group.name}}</td>
+                                    <td>{{group.leader}}</td>
+                                    <td>{{group.get_number_of_members}}</td>
+                                </tr>
+                            {% endfor %}
+                            {% for group in member %}
+                                <tr>
+                                    <td>{{ group.name }}</td>
+                                    <td>{{ group.leader }}</td>
+                                    <td>{{ group.get_number_of_members}}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td>Não há nenhum grupo para mostar😢<br>Mas você pode criá-lo!</td>
+                            </tr>
+                        {% endif %}
                     </tbody>
                 </table>
             </div>

@@ -1,3 +1,37 @@
 {% extends 'core/base.html' %}
-{% block content %}
-{% endblock content %}
+{% load static %}
+
+{% block head_extra %}
+    <link rel="stylesheet" href="{% static 'tinder/css/group_creation.css' %}">
+{% endblock %}
+
+{% block main_content %}
+    <div class="group-creation">
+        <h2>Criação de grupo</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.leader }}
+            {{form.name.label_tag}} <span class="error">{{ form.name.errors }}</span>
+            {{ form.name }}
+
+            <label for="id_private" class="private-box">
+                {{ form.private }}
+                Privado?
+            </label>
+
+            <div id="password-box" hidden>
+                {{ form.password.label_tag }}
+                {{ form.password }}
+
+                {{ form.password2.label_tag }}
+                {{ form.password2 }}
+            </div>
+
+            <button>Criar grupo</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block end_scripts %}
+    <script src="{% static 'tinder/js/group-creation.js' %}"></script>
+{% endblock %}

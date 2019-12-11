@@ -87,70 +87,24 @@ a.edit-btn {
     border-radius: 10px;
 }
 
-.avatar-container {
-    flex-grow: 1;
-    width: 200px;
-    height: 200px;
-    position: relative;
-}
-
-a.modal-trigger {
-    max-width: 100%;
-}
-
-.avatar {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    height: 100%;
-    width: 100%;
-    font-size: 174px;
-    color: #999;
-    object-position: center;
-    background: #ddd;
-    border: 1px solid #999;
-    border-radius: 4px;
-    padding: 3px;
-    object-fit: cover;
-}
-
-.avatar::after {
-    content: "edit";
-    font-family: 'Material Icons';
-    font-size: 48px;
-    position: relative;
-    right: 25%;
-    color: grey;
-    opacity: .5;
-}
-
-.avatar:hover::after {
-    color: blue;
-}
-
-#sidebar {
-    border-right: 1px solid #999;
+.menus {
     display: flex;
-    flex: 1;
-    flex-direction: column;
-    min-height: 100%;
+    width: fit-content;
+    align-items: center;
 }
 
-.avatar-preview {
-    height: 350px;
-    width: 350px;
-    background-color: #ddd;
-    display: inline-block;
+.menus a {
+    display: flex;
+    align-items: center;
+    margin-right: .5em;
+    padding: .25em;
 }
 
-#avatar-preview-img {
-    height: 100%;
-    width: 100%;
-    object-position: center;
-    object-fit: scale-down;
+.menus a:hover {
+    background-color: darkgray;
+    transition: .5s background-color;
 }
 
-.controls {
-    display: inline-block;
+.menus a i {
+    color: green;
 }

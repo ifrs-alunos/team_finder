@@ -1,13 +1,14 @@
 * {
 	--primary-color: #40539b;
-	--secondary-color: #8869ff;
-	--accent-color: #ee8127;
+	--secondary-color: #6b8fff;
+	--accent-color: #eec22a;
 
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 	outline: none;
 }
+
 a {
 	text-decoration: none;
 	color: currentColor;
@@ -41,24 +42,23 @@ header nav ul {
 	list-style: none;
 	align-items: center;
 	justify-items: end;
-}
-
-header nav ul li {
-	padding: 1em;
-	border-radius: 10px;
+	margin: 20px;
 }
 
 header nav ul li a {
+	padding: 1em;
+	border-radius: 10px;
 	text-decoration: none;
 	color: white;
+	margin: .25em;
 }
 
-header nav ul li:hover {
+header nav ul li a:hover {
 	text-decoration: none;
 	background-color: rgba(255, 255, 255, .2);
 }
 
-header nav ul li.register {
+header nav ul li.register a {
 	border: 3px solid white;
 }
 
@@ -86,35 +86,47 @@ main {
 	}
 }
 
-.icon-input {
-	display: flex;
-	flex-direction: row;
-	padding: 1em;
-	align-items: center;
-}
-
-.icon-input i.material-icons {
-	background-color: darkgrey;
-	padding: 100%;
-	border-radius: 5px 0 0 5px;
-	position: relative;
-	top: .3px;
-}
-
-.icon-input input.styled {
-	font-size: 15px;
-	padding: 5px;
-	border-radius: 0 5px 5px 0;
-	outline: none;
-	border: 1px solid darkgray;
-}
-
-input.styled {
-	border-radius: 5px;
-	outline: none;
-	border: 1px solid darkgray;
-	width: 100%;
-}
 footer {
 	background-color: var(--primary-color);
+	display: flex;
+	padding: 2.5em;
+	color: white;
+	flex-direction: column;
+}
+
+form input, form textarea {
+    padding: .5em;
+    border-radius: 5px;
+    border: 1px solid #999999;
+}
+
+form input:not([type='checkbox']) {
+    width: 100%;
+}
+
+form label {
+    margin-top: .5em;
+}
+
+form:not(.default) button {
+    align-self: start;
+    font-size: 20px;
+    padding: .2em;
+    border-radius: 5px;
+    border: 1px solid #999999;
+    background-color: var(--accent-color);
+    cursor: pointer;
+}
+
+span.error {
+	color: red;
+}
+
+span.error ul {
+	list-style: none;
+	display: inline;
+}
+
+span.error ul li {
+	display: inline;
 }

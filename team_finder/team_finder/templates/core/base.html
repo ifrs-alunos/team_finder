@@ -22,7 +22,9 @@
 			<nav>
                 <ul>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'tinder:main_menu' %}">Meu perfil</a></li>
+                        {% if user.first_name %}
+                            <li><a href="{% url 'tinder:main_menu' %}">Meu Espaço</a></li>
+                        {% endif %}
                         <li><a href="{% url 'logout' %}">Sair</a></li>
                     {% else %}
                         <li class="login"><a href="{% url 'login' %}">Login</a></li>
@@ -41,16 +43,10 @@
 	{% endblock main %}
 
 	{% block footer %}
-		<footer class="page-footer green darken-3">
-			<div class="row container">
-				<p>Projeto Django básico</p>
-			</div>
-			<div class="footer-copyright">
-				<div class="container">
-					<p>&copy; 2019 - Diego Cardoso Nunes e Luís Eduardo Borges</p>
-				</div>
-			</div>
-		</footer>
+		<footer class="container">
+            <p>&copy; Diego Cardoso Nunes, Luís Eduardo dos Reis Borges</p>
+            <p>Site desenvolvido para a disciplina Desenvolvimento de Aplicações WEB III</p>
+        </footer>
 	{% endblock footer %}
 	{% block end_scripts %}
 	{% endblock end_scripts %}

@@ -1,33 +1,52 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import GroupForm
 from .models.groups import Group
-from .models.skill_levels import SkillLevel
 from .models.skills import Skill
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseNotAllowed
 
-@login_required
+
 def my_menu(request):
-	profile = request.user.profile
-	groups_i_rule, groups_i_belong = [], []
+	search_term = request.GET.get('search')
+	user_profile = request.user.profile
 
-	for group in profile.group_list.all():
-		if group.leader == profile:
-			groups_i_rule.append(group)
-		else:
-			groups_i_belong.append(group)
+	leading = user_profile.leading.all()
+	member = user_profile.group_list.all()
 
-	context = {'profile':profile, 'leader':groups_i_rule, 'member':groups_i_belong}
-	return render(request, 'tinder/main_menu.html', context)
+	if search_term:
+		leading = leading.filter(name__contains=search_term)
+		member = member.filter(name__contains=search_term)
+
+	return render(request, 'tinder/main_menu.html', {'leading': leading, 'member': member})
 
 @login_required
+def create_group(request):
+	if request.method == 'POST':
+		form = GroupForm(request.POST)
+		if form.is_valid():
+			group = form.save(commit=False)
+			group.leader = request.user.profile
+			group.save()
+			messages.success(request, "GRUPO SALVO COM SUCESSO")
+			return redirect('tinder:main_menu')
+	else:
+		form = GroupForm(initial={'leader': request.user.profile})
+
+	print('erro', form.errors)
+	context = {
+		'form': form,
+	}
+
+	return render(request, 'tinder/create_groups.html', context)
+
 def search_my_groups(request, name):
 	profile = request.user.profile
 	mygroups = profile.group_list
 	results = mygroups.filter(name__contains=name)
 	context = {'results':results}
-	return render(requets, 'core/home.html', context)
+	return render(request, 'core/home.html', context)
+
 
 @login_required
 def search_group(request, name):
@@ -130,7 +149,7 @@ def delete_group(request, group_id):
 @login_required
 def join_group(request, group_id, userpass):
 	group = get_object_or_404(Group, pk=group_id)
-	if userpass == group.passwd:
+	if userpass == group.password:
 		group.members.add(request.user.profile)
 
 @login_required
@@ -138,7 +157,6 @@ def rmv_fromgroup(request, group_id, userpass, member):
 	#tirar algm de um grupo ou a si mesmo
 	message = ''
 	group = get_object_or_404(Group, pk=group_id)
-
 	if (user.profile == group.leader) and (userpass == group.passwd) and (member in group.members):
 		group.members.delete(member)
 		message = 'REMOÇÃO BEM-SUCEDIDA.'

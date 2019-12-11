@@ -18,6 +18,15 @@ form input, form textarea {
     border: 1px solid #999999;
 }
 
+form textarea {
+    max-width: 100%;
+    min-width: 100%;
+}
+
+form input {
+    width: 100%;
+}
+
 form label {
     margin-top: .5em;
 }
@@ -29,4 +38,11 @@ form button {
     border-radius: 5px;
     border: 1px solid #999999;
     background-color: var(--accent-color);
+    cursor: pointer;
+    margin-top: .5em;
+}
+
+select {
+    padding: .5em;
+    border-radius: 5px;
 }
