@@ -21,6 +21,11 @@ class UserEditForm(forms.ModelForm):
         model = User
         fields = ('first_name', 'last_name', )
 
+    def __init__(self, *args, **kwargs):
+        super(UserEditForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):

@@ -1,19 +1,38 @@
 {% extends 'core/base.html' %}
 {% load static %}
+{% load data_access %}
 
 {% block head_extra %}
     <link rel="stylesheet" href="{% static 'accounts/css/update_profile.css' %}">
 {% endblock %}
 
 {% block main_content %}
-    <h2>Edite suas informações</h2>
+    {% if user.first_name %}
+        <h2>Edite suas informações</h2>
+    {% else %}
+        <h2>Termine seu cadastro para continuar</h2>
+    {% endif %}
 
     <form action="" method="POST">
     	{% csrf_token %}
-        <div class="user-form">
-            {{ user_form }}
-        </div>
+        {{ user_form }}
         {{ profile_form }}
+        <div class="skill-form">
+            {{ skill_formset.management_form }}
+            <table>
+                <tr>
+                    <th>Habilidade</th>
+                    <th>Nível</th>
+                </tr>
+                {% for form in skill_formset %}
+                <tr>
+                    {{ form.id }}
+                    <td>{{ form.skill }}</td>
+                    <td>{{ form.level }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
         <button type="submit">Salvar</button>
     </form>
 {% endblock %}

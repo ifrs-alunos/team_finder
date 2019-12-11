@@ -1,8 +1,9 @@
 from django import forms
 from django.core.exceptions import ValidationError
-
-from .models.groups import Group
 from accounts.models import Profile
+
+from .models import Group, SkillLevel, Skill
+from .fields import ReadOnlySelect
 
 
 class GroupForm(forms.ModelForm):
@@ -36,3 +37,24 @@ class GroupForm(forms.ModelForm):
 
 		if not private:
 			del cleaned_data['password']
+
+
+class SkillLevelForm(forms.ModelForm):
+	class Meta:
+		model = SkillLevel
+		fields = ('skill', 'level')
+
+	def __init__(self, *args, **kwargs):
+		super(SkillLevelForm, self).__init__(*args, **kwargs)
+		self.fields['skill'].disabled = True
+
+
+def get_skill_level_formset():
+	return forms.inlineformset_factory(
+		Profile,
+		SkillLevel,
+		form=SkillLevelForm,
+		extra=len(SkillLevel.objects.all()),
+		max_num=len(SkillLevel.objects.all()),
+		can_delete=False,
+	)

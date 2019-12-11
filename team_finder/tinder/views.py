@@ -38,12 +38,14 @@ def create_group(request):
 
 	return render(request, 'tinder/create_groups.html', context)
 
+
 def search_my_groups(request, name):
 	profile = request.user.profile
 	mygroups = profile.group_list
 	results = mygroups.filter(name__contains=name)
 	context = {'results':results}
 	return render(request, 'core/home.html', context)
+
 
 def search_group(request, name):
 	results = Group.objects.filter(name__contains=name).exclude(private = True)
