@@ -88,26 +88,6 @@ def match_withlist(request):
 	return render(request, 'tinder/grupos.html', {'best_groups': best_groups})
 
 
-
-""" Groups CRUD """
-@login_required
-def create_group(request):
-	message = ''
-	if request.method == 'POST':
-		form = GroupForm(request.POST)
-		if form.is_valid():
-			form.save()
-			messages.success(request, "GRUPO SALVO COM SUCESSO")
-			return redirect('tinder:main_menu')
-	else:
-		form = GroupForm()
-
-	context = {
-		'form': form,
-	}
-
-	return render(request, 'core/home.html', context)
-
 @login_required
 def edit_group(request, group_id):
 	group = get_object_or_404(Group, pk=group_id)
